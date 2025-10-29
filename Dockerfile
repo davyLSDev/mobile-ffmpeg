@@ -37,6 +37,10 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 
+# Allow Git to trust /workspace directory ownership
+RUN git config --system --add safe.directory /workspace
+
+
 # --------------------------------------------------
 # Set up Android SDK and NDK (mimicking Travis)
 # --------------------------------------------------
