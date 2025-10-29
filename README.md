@@ -1,4 +1,15 @@
-# MobileFFmpeg [![Financial Contributors on Open Collective](https://opencollective.com/mobile-ffmpeg/all/badge.svg?label=financial+contributors)](https://opencollective.com/mobile-ffmpeg) ![GitHub release](https://img.shields.io/badge/release-v4.4-blue.svg) ![Maven Central](https://img.shields.io/maven-central/v/com.arthenica/mobile-ffmpeg-min) ![CocoaPods](https://img.shields.io/badge/pod-v4.4-blue.svg) [![Build Status](https://travis-ci.org/tanersener/mobile-ffmpeg.svg?branch=master)](https://travis-ci.org/tanersener/mobile-ffmpeg)
+# MobileFFmpeg is a fork from [mobile-ffmpeg](https://github.com/tanersener/mobile-ffmpeg) and is no longer maintained by the author - see below
+Previously the build artifact from jcentre was used to build Story Producer App is no longer accessible since it was shut down.
+The version this project has used mobile-ffmpeg-full-4.2.LTS.aar.
+
+## Goals
+1. build mobile-ffmpeg from master on a Docker container which has a travis.ci build agent
+2. ensure the *aar artifact allows SPA to build / work properly (if not, then build based on v4.2LTS tag)
+3. make a travis.ci build agent Docker container to build on the most recent Ubuntu LTS base (24.03 as of this update)
+4. make changes in the project / build agent to build to enable 16kB memory page sizes as required by GPS
+5. make a TC agent to do all the required build steps to produce the proper *.aar artefact for use in building SPA
+
+## MobileFFmpeg [![Financial Contributors on Open Collective](https://opencollective.com/mobile-ffmpeg/all/badge.svg?label=financial+contributors)](https://opencollective.com/mobile-ffmpeg) ![GitHub release](https://img.shields.io/badge/release-v4.4-blue.svg) ![Maven Central](https://img.shields.io/maven-central/v/com.arthenica/mobile-ffmpeg-min) ![CocoaPods](https://img.shields.io/badge/pod-v4.4-blue.svg) [![Build Status](https://travis-ci.org/tanersener/mobile-ffmpeg.svg?branch=master)](https://travis-ci.org/tanersener/mobile-ffmpeg)
 
 FFmpeg for Android, iOS and tvOS. 
 
