@@ -62,8 +62,8 @@ export BASEDIR=$(pwd)
 
 export MOBILE_FFMPEG_TMPDIR="${BASEDIR}/.tmp"
 
-# USING API LEVEL 24 / Android 7.0 (NOUGAT)
-export API=24
+# USING API LEVEL 28 / Android 7.0 (NOUGAT)
+export API=28
 
 get_mobile_ffmpeg_version() {
     local MOBILE_FFMPEG_VERSION=$(grep '#define MOBILE_FFMPEG_VERSION' ${BASEDIR}/android/app/src/main/cpp/mobileffmpeg.h | grep -Eo '\".*\"' | sed -e 's/\"//g')
@@ -182,7 +182,8 @@ enable_lts_build() {
     export MOBILE_FFMPEG_LTS_BUILD="1"
 
     # USING API LEVEL 21 / Android 5.0 (LOLLIPOP)
-    export API=21
+    # Changed to see if we can build the library correctly
+    export API=28
 }
 
 reconf_library() {
@@ -221,7 +222,7 @@ set_library() {
         ;;
         freetype)
             ENABLED_LIBRARIES[LIBRARY_FREETYPE]=$2
-            ENABLED_LIBRARIES[LIBRARY_ZLIB]=$2
+            ENABLED_LIBRARIES[LIBRARY_ZLIB]=$2ANDROID
             set_library "libpng" $2
         ;;
         fribidi)
@@ -278,7 +279,7 @@ set_library() {
             ENABLED_LIBRARIES[LIBRARY_LIBVORBIS]=$2
             ENABLED_LIBRARIES[LIBRARY_LIBOGG]=$2
         ;;
-        libvpx)
+        libvpx)ANDROID
             ENABLED_LIBRARIES[LIBRARY_LIBVPX]=$2
         ;;
         libwebp)

@@ -19,6 +19,7 @@ RUN apt-get clean && \
         autoconf \
         automake \
         libtool \
+        libncurses5 \
         pkg-config \
         cmake \
         gcc \
@@ -31,10 +32,18 @@ RUN apt-get clean && \
         autogen \
         patch \
         sudo \
+        python3 \
+        python3-pip \
         vim-tiny \
         ca-certificates \
         && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+# CRITICAL FIX for older NDKs (like r17c): Install libtinfo.so.5 dependency
+# This library is required by the older NDK clang/toolchain executables.
+    
+# Ensure 'python' command points to the installed 'python3' executable
+RUN which python3 && ln -sf $(which python3) /usr/local/bin/python
 
 # --------------------------------------------------
 # Default working directory inside container
@@ -68,10 +77,11 @@ RUN sdkmanager --sdk_root=$ANDROID_SDK_ROOT --version && \
     yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses || true && \
     yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
         "platform-tools" \
-        "platforms;android-24" \
+        "platforms;android-28" \
         "build-tools;28.0.3" \
         "cmake;3.10.2.4988404" \
-        "ndk;21.3.6528147"
+        "ndk;17.2.4988734"
+# downgraded to build v4.2.LTS from:        "ndk;21.3.6528147"
 
 # Grant write access to the entire SDK folder for all users.
 # This ensures that ANY user, including the one imported via '--user', 
@@ -99,10 +109,11 @@ RUN chmod -R a+rwX /home/builder /workspace
 RUN yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses || true && \
     yes | sdkmanager --sdk_root=$ANDROID_SDK_ROOT \
         "platform-tools" \
-        "platforms;android-24" \
+        "platforms;android-28" \
         "build-tools;28.0.3" \
         "cmake;3.10.2.4988404" \
-        "ndk;21.3.6528147"
+        "ndk;17.2.4988734"
+# downgraded from:        "ndk;21.3.6528147"
 
 # --------------------------------------------------
 # Install NASM (same as travis)
